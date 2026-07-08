@@ -125,6 +125,35 @@
     text-transform: uppercase;
     font-size: 0.8rem;
     margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1, .hero p { position: relative; z-index: 2; }
+
+  /* GHOST MASCOTS */
+  .ghosts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ghost {
+    position: absolute;
+    animation: float 4s ease-in-out infinite;
+    opacity: 0.95;
+  }
+
+  .ghost img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-16px) rotate(2deg); }
   }
 
   .hero h1 {
@@ -286,6 +315,8 @@
 
 <div class="hero">
     <div class="stars" id="stars"></div>
+    <div class="ghosts" id="ghosts"></div>
+
     <div class="eyebrow">Illustration &amp; Character Art</div>
     <h1>Little worlds, drawn <span>one moon</span> at a time</h1>
     <p>A small gallery of chibi characters, quiet skies, and the odd tomato with too much makeup on.</p>
@@ -332,7 +363,7 @@
 </div>
 
 <div class="footer">
-    © 2026 rrabbi illustration — made with pencils, pixels, and a little too much coffee ☕
+    © 2026 rrabbi illustration — made with pencils, pixels, and a little cute things
 </div>
 
 <script>
@@ -345,6 +376,29 @@ for (let i = 0; i < 25; i++) {
     star.style.animationDelay = (Math.random() * 3) + 's';
     starsContainer.appendChild(star);
 }
+
+// Floating ghost mascots (using your uploaded ghost.png)
+const ghostImgHTML = `<img src="pepe.png" alt="Cute ghost illustration">`;
+
+const ghostSpots = [
+    { top: '8%',  left: '6%',  size: 60,  delay: 0    },
+    { top: '55%', left: '10%', size: 44,  delay: 1.2  },
+    { top: '12%', left: '85%', size: 70,  delay: 0.6  },
+    { top: '62%', left: '88%', size: 50,  delay: 1.8  },
+    { top: '75%', left: '46%', size: 38,  delay: 2.4  }
+];
+
+const ghostsContainer = document.getElementById('ghosts');
+ghostSpots.forEach(spot => {
+    const g = document.createElement('div');
+    g.className = 'ghost';
+    g.style.top = spot.top;
+    g.style.left = spot.left;
+    g.style.width = spot.size + 'px';
+    g.style.animationDelay = spot.delay + 's';
+    g.innerHTML = ghostImgHTML;
+    ghostsContainer.appendChild(g);
+});
 
 // CAROUSEL LOGIC
 const track = document.querySelector('.carousel-track');
