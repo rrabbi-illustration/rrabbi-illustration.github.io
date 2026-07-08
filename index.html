@@ -1,98 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Ilustration Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rrabbi — Illustration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    --midnight: #1A1030;
+    --plum: #2E1F3D;
+    --lilac: #B8A4D4;
+    --blush: #F4A6A0;
+    --gold: #F0C674;
+    --paper: #FBF7F4;
+  }
 
-body {
+  * { box-sizing: border-box; }
+
+  body {
     margin: 0;
-    font-family: Arial, sans-serif;
-}
+    font-family: 'Nunito', sans-serif;
+    background: var(--paper);
+    color: var(--plum);
+  }
 
-/* NAVBAR */
-.navbar {
-    background-color: #006241;
-    color: white;
-    padding: 15px 30px;
+  h1, h2, h3 {
+    font-family: 'Baloo 2', sans-serif;
+  }
+
+  a { color: inherit; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* NAVBAR */
+  .navbar {
+    background-color: var(--midnight);
+    color: var(--paper);
+    padding: 18px 36px;
     display: flex;
     justify-content: space-between;
-}
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-}
-
-/* HERO */
-.hero {
-    height: 500px;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('housedada.png');
-    background-size: cover;
+  .navbar h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
     display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .navbar h2::before {
+    content: "✦";
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .navbar nav a {
+    text-decoration: none;
+    margin-left: 22px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  .navbar nav a:hover,
+  .navbar nav a:focus-visible {
+    opacity: 1;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 62vh;
+    background: radial-gradient(ellipse at 20% 20%, rgba(184,164,212,0.35), transparent 55%),
+                linear-gradient(180deg, var(--midnight) 0%, #241537 100%);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
-}
-
-/* SECTION */
-.section {
-    padding: 50px;
+    color: var(--paper);
     text-align: center;
-}
+    overflow: hidden;
+    padding: 40px 20px;
+  }
 
-/* CAROUSEL */
-.carousel {
+  .hero .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero .stars span {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  .hero .eyebrow {
+    font-family: 'Baloo 2', sans-serif;
+    color: var(--blush);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    margin: 0 0 14px;
+    line-height: 1.1;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+  }
+
+  .hero p {
+    max-width: 480px;
+    font-size: 1.05rem;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  /* SCALLOP DIVIDER (signature element) */
+  .scallop {
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin-top: -1px;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 60px 20px 70px;
+    text-align: center;
+  }
+
+  .section .eyebrow {
+    font-family: 'Baloo 2', sans-serif;
+    color: var(--lilac);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+    margin: 0 0 8px;
+    color: var(--plum);
+  }
+
+  .section .sub {
+    color: #6b5c7a;
+    margin-bottom: 40px;
+    font-size: 1rem;
+  }
+
+  /* CAROUSEL */
+  .carousel {
     width: 900px;
-    max-width: 95vw;
+    max-width: 92vw;
     margin: auto;
     overflow: hidden;
     position: relative;
-}
+  }
 
-.carousel-track {
+  .carousel-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
-}
+  }
 
-/* 3 visible */
-.slide {
+  .slide {
     min-width: 300px;
     text-align: center;
-}
+    padding: 0 12px;
+  }
 
-.slide img {
+  .slide .card {
+    background: white;
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 10px 24px rgba(46, 31, 61, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .slide .card:hover {
+    transform: rotate(-1.5deg) translateY(-4px);
+    box-shadow: 0 16px 30px rgba(46, 31, 61, 0.18);
+  }
+
+  .slide img {
     width: 100%;
-    height: 300px;
+    height: 260px;
     object-fit: contain;
     border-radius: 10px;
-}
+    background: #f4f1f8;
+    display: block;
+  }
 
-/* BUTTONS */
-.prev, .next {
+  .slide p {
+    margin: 12px 0 2px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 600;
+    color: var(--plum);
+  }
+
+  /* BUTTONS */
+  .prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
-    color: white;
+    background: var(--midnight);
+    color: var(--paper);
     border: none;
-    padding: 10px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
     cursor: pointer;
     border-radius: 50%;
-}
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+  .prev:hover, .next:hover,
+  .prev:focus-visible, .next:focus-visible {
+    background: var(--blush);
+    transform: translateY(-50%) scale(1.08);
+  }
 
-/* FOOTER */
-.footer {
-    background: #006241;
-    color: white;
+  .prev { left: -6px; }
+  .next { right: -6px; }
+
+  @media (min-width: 700px) {
+    .prev { left: -22px; }
+    .next { right: -22px; }
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--midnight);
+    color: var(--paper);
     text-align: center;
-    padding: 20px;
-}
+    padding: 26px 20px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
 
 </style>
 </head>
@@ -100,104 +278,125 @@ body {
 <body>
 
 <div class="navbar">
-    <h2>rrabbi_</h2>
+    <h2>rrabbi</h2>
+    <nav>
+        <a href="#gallery">Gallery</a>
+    </nav>
 </div>
 
 <div class="hero">
-    <h1>My Illustration 🎨</h1>
+    <div class="stars" id="stars"></div>
+    <div class="eyebrow">Illustration &amp; Character Art</div>
+    <h1>Little worlds, drawn <span>one moon</span> at a time</h1>
+    <p>A small gallery of chibi characters, quiet skies, and the odd tomato with too much makeup on.</p>
 </div>
 
-<div class="section">
+<svg class="scallop" viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path d="M0,0 C 50,40 100,0 150,20 C 200,40 250,0 300,20 C 350,40 400,0 450,20 C 500,40 550,0 600,20 C 650,40 700,0 750,20 C 800,40 850,0 900,20 C 950,40 1000,0 1050,20 C 1100,40 1150,0 1200,20 L1200,0 Z" fill="#1A1030"></path>
+</svg>
+
+<div class="section" id="gallery">
+    <div class="eyebrow">Sketchbook</div>
     <h2>My drawings</h2>
+    <p class="sub">Swipe through — it loops forever, like a good daydream.</p>
 
     <div class="carousel">
 
-        <button class="prev">&#10094;</button>
+        <button class="prev" aria-label="Previous drawing">&#10094;</button>
 
         <div class="carousel-track">
 
             <!-- CLONES (last 3) -->
-            <div class="slide"><img src="shesheep.png"><p>MySheep</p></div>
-            <div class="slide"><img src="shepokemon.png"><p>MyPokemon</p></div>
-            <div class="slide"><img src="lavender.png"><p>Lavender</p></div>
-            <div class="slide"><img src="shechi.png"><p>MyWhitetitbird</p></div>
-            <div class="slide"><img src="gloe.png"><p>MyWhitetitbird</p></div>
-            
+            <div class="slide"><div class="card"><img src="shesheep.png" alt="MySheep illustration"><p>MySheep</p></div></div>
+            <div class="slide"><div class="card"><img src="shepokemon.png" alt="MyPokemon illustration"><p>MyPokemon</p></div></div>
+            <div class="slide"><div class="card"><img src="lavender.png" alt="Lavender illustration"><p>Lavender</p></div></div>
 
             <!-- REAL SLIDES -->
-            <div class="slide"><img src="shesheep.png"><p>Milkyway</p></div>
-            <div class="slide"><img src="shepokemon.png"><p>My</p></div>
-            <div class="slide"><img src="lavender.png"><p>Lavender</p></div>
-            <div class="slide"><img src="shechi.png"><p>MyWhitetitbird</p></div>
-            <div class="slide"><img src="shewolf.png"><p>MyWolfGirl</p></div>
-            <div class="slide"><img src="makeup.png"><p>TomatoMakeup</p></div>
-                
+            <div class="slide"><div class="card"><img src="shesheep.png" alt="Milkyway illustration"><p>Milkyway</p></div></div>
+            <div class="slide"><div class="card"><img src="shepokemon.png" alt="My illustration"><p>My</p></div></div>
+            <div class="slide"><div class="card"><img src="lavender.png" alt="Lavender illustration"><p>Lavender</p></div></div>
+            <div class="slide"><div class="card"><img src="shechi.png" alt="MyWhitetitbird illustration"><p>MyWhitetitbird</p></div></div>
+            <div class="slide"><div class="card"><img src="shewolf.png" alt="MyWolfGirl illustration"><p>MyWolfGirl</p></div></div>
+            <div class="slide"><div class="card"><img src="makeup.png" alt="TomatoMakeup illustration"><p>TomatoMakeup</p></div></div>
 
             <!-- CLONES (first 3) -->
-            <div class="slide"><img src="shesheep.png"><p>Milkyway</p></div>
-            <div class="slide"><img src="shepokemon.png"><p>Whitelily</p></div>
-            <div class="slide"><img src="lavender.png"><p>Mocha</p></div>
+            <div class="slide"><div class="card"><img src="shesheep.png" alt="Milkyway illustration"><p>Milkyway</p></div></div>
+            <div class="slide"><div class="card"><img src="shepokemon.png" alt="Whitelily illustration"><p>Whitelily</p></div></div>
+            <div class="slide"><div class="card"><img src="lavender.png" alt="Mocha illustration"><p>Mocha</p></div></div>
 
         </div>
 
-        <button class="next">&#10095;</button>
+        <button class="next" aria-label="Next drawing">&#10095;</button>
 
     </div>
 </div>
 
 <div class="footer">
-    © 2026 rrabbi illustration
+    © 2026 rrabbi illustration — made with pencils, pixels, and a little too much coffee ☕
 </div>
 
 <script>
+// Twinkling stars in hero
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 25; i++) {
+    const star = document.createElement('span');
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = (Math.random() * 3) + 's';
+    starsContainer.appendChild(star);
+}
+
+// CAROUSEL LOGIC
 const track = document.querySelector('.carousel-track');
 const slides = document.querySelectorAll('.slide');
 
-const slideWidth = 300;
-let index = 3; // start at real first slide
+function getSlideWidth() {
+    return slides[0].getBoundingClientRect().width;
+}
 
-// INITIAL POSITION
-track.style.transform = `translateX(-${index * slideWidth}px)`;
+let index = 3; // start at real first slide, arrows visible from the very first frame
+let slideWidth = getSlideWidth();
 
-// MOVE FUNCTION
-function moveSlide() {
-    track.style.transition = "transform 0.5s ease-in-out";
+function setPosition(withTransition = true) {
+    track.style.transition = withTransition ? "transform 0.5s ease-in-out" : "none";
     track.style.transform = `translateX(-${index * slideWidth}px)`;
 }
 
-// NEXT
+// INITIAL POSITION (both arrows are already visible here, since they sit
+// on the .carousel wrapper, not the sliding track)
+setPosition(false);
+
 document.querySelector('.next').addEventListener('click', () => {
     index++;
-    moveSlide();
+    setPosition(true);
 });
 
-// PREV
 document.querySelector('.prev').addEventListener('click', () => {
     index--;
-    moveSlide();
+    setPosition(true);
 });
 
-// LOOP FIX
 track.addEventListener('transitionend', () => {
     if (index >= slides.length - 3) {
-        track.style.transition = "none";
         index = 3;
-        track.style.transform = `translateX(-${index * slideWidth}px)`;
+        setPosition(false);
     }
-
-    if (index <= 0) {
-        track.style.transition = "none";
+    if (index <= 2) {
         index = slides.length - 6;
-        track.style.transform = `translateX(-${index * slideWidth}px)`;
+        setPosition(false);
     }
+});
+
+window.addEventListener('resize', () => {
+    slideWidth = getSlideWidth();
+    setPosition(false);
 });
 
 // AUTO SLIDE
 setInterval(() => {
     index++;
-    moveSlide();
-}, 3000);
-
+    setPosition(true);
+}, 3500);
 </script>
 
 </body>
